@@ -1,0 +1,63 @@
+# IntelliJ / Eclipse / vscode
+.idea/
+.classpath
+.project
+.settings/
+.vscode/
+
+# Compiled bytecode
+/target/
+/build/
+*.class
+
+# Log files
+*.log
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Spring Boot
+spring-boot-starter-*/target/
+!spring-boot-starter-*/target/classes/
+spring-boot-starter-*/target/test-classes/
+spring-boot-starter-*/target/surefire-reports/
+
+# Maven
+log/
+target/
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+
+# Gradle
+.gradle/
+build/
+
+# IDE files
+*.iml
+*.ipr
+*.iws
+
+# Logs
+log/
+*.log*
+
+# Bytecode
+*.class
+*.jar
+
+# Dependencies
+# (Add other dependency directories as needed)
+/target
+/lib
+/bin
+
+# Package Files
+*.jar
+*.war
+*.ear
+
+# Local configuration file (e.g., application-local.properties)
+application-*.yml
