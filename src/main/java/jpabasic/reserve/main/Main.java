@@ -13,12 +13,16 @@ import jpabasic.reserve.jpa.EMF;
 import jpabasic.reserve.service.GetUserService;
 import jpabasic.reserve.service.NewUserService;
 import jpabasic.reserve.service.NoUserException;
+import jpabasic.reserve.service.PutUserService;
+import jpabasic.reserve.service.RemoveUserService;
 
 public class Main {
     private static Logger logger = LoggerFactory.getLogger(Main.class);
 
     private static GetUserService getUserService = new GetUserService();
     private static NewUserService newUserService = new NewUserService();
+    private static PutUserService putUserService = new PutUserService();
+    private static RemoveUserService removeUserService = new RemoveUserService();
 
     public static void main(String[] args) throws IOException {
         EMF.init();
@@ -60,28 +64,24 @@ public class Main {
         try {
             User user = getUserService.getUser(email);
             logger.info("사용자 정보: {}", user);
-            logger.info("사용자 이름: {}", user.getName());
         } catch (NoUserException e) {
             logger.info("사용자가 존재하지 않음: {}", email);
         }
     }
 
     private static void handleChangeName(String line) {
-        /*
         String[] v = line.substring(12).split(" ");
         String email = v[0];
         String newName = v[1];
         try {
-            changeNameService.changeName(email, newName);
+            putUserService.changeUserName(email, newName);
             logger.info("사용자 이름 변경: {}, {}", email, newName);
         } catch (NoUserException e) {
             logger.info("사용자가 존재하지 않음: {}", email);
         }
-        */
     }
 
     private static void handleRemove(String line) {
-        /*
         String email = line.substring(7);
         try {
             removeUserService.removeUser(email);
@@ -89,6 +89,5 @@ public class Main {
         } catch (NoUserException e) {
             logger.info("사용자가 존재하지 않음: {}", email);
         }
-        */
     }
 }

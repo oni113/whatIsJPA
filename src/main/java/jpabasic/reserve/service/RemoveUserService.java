@@ -1,22 +1,23 @@
 package jpabasic.reserve.service;
 
-import java.time.LocalDateTime;
-
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import jpabasic.reserve.domain.User;
 import jpabasic.reserve.jpa.EMF;
 
-public class NewUserService {
-
-    public void createUser(String email, String name) {
+public class RemoveUserService {
+    
+    public void removeUser(String email) {
         EntityManager em = EMF.creaEntityManager();
         EntityTransaction tx = em.getTransaction();
 
         try {
             tx.begin();
-            User newUser = new User(email, name, LocalDateTime.now());
-            em.persist(newUser);
+            User user = em.find(User.class, email);
+            if (user == null) {
+                throw new NoUserException();
+            }
+            em.remove(user);
             tx.commit();
         } catch (Exception e) {
             tx.rollback();

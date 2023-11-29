@@ -14,7 +14,6 @@ public class GetUserService {
             throw new NoUserException();
         } finally {
             em.close();
-            EMF.close();
         }
 
         return user;
