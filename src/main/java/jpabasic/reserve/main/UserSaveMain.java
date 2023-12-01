@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import jpabasic.reserve.domain.User;
+import jpabasic.reserve.domain.WriteInfo;
 import jpabasic.reserve.jpa.EMF;
 
 public class UserSaveMain {
@@ -19,7 +20,7 @@ public class UserSaveMain {
         EntityTransaction transaction = entityManager.getTransaction();
         try {
             transaction.begin();
-            User user = new User("userkor@user.com", "한글유저", LocalDateTime.now());
+            User user = new User("userkor@user.com", "한글유저", new WriteInfo(LocalDateTime.now()));
             entityManager.persist(user);
             transaction.commit();
         } catch (Exception ex) {

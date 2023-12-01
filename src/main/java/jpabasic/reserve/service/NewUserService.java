@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import jpabasic.reserve.domain.User;
+import jpabasic.reserve.domain.WriteInfo;
 import jpabasic.reserve.jpa.EMF;
 
 public class NewUserService {
@@ -15,7 +16,7 @@ public class NewUserService {
 
         try {
             tx.begin();
-            User newUser = new User(email, name, LocalDateTime.now());
+            User newUser = new User(email, name, new WriteInfo(LocalDateTime.now()));
             em.persist(newUser);
             tx.commit();
         } catch (Exception e) {

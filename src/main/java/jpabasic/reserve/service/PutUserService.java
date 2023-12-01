@@ -12,13 +12,13 @@ public class PutUserService {
         EntityTransaction tx = em.getTransaction();
 
         try {
+            tx.begin();
             User user = em.find(User.class, email);
             if (user == null) {
                 throw new NoUserException();
             }
-            tx.begin();
             user.changeName(newName);
-            em.persist(user);
+            user.updateModifyDate();
             tx.commit();
         } catch (Exception e) {
             tx.rollback();

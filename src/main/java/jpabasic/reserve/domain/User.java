@@ -1,29 +1,30 @@
 package jpabasic.reserve.domain;
 
-import jakarta.persistence.Column;
+import java.time.LocalDateTime;
+
+import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-
-import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "user")
 public class User {
     @Id
     private String email;
+    
     private String name;
 
-    @Column(name = "create_date")
-    private LocalDateTime createDate;
+    @Embedded
+    private WriteInfo writeInfo;
 
     protected User() {
     }
 
-    public User(String email, String name, LocalDateTime createDate) {
+    public User(String email, String name, WriteInfo writeInfo) {
         this.email = email;
         this.name = name;
-        this.createDate = createDate;
+        this.writeInfo = writeInfo;
     }
 
     public String getEmail() {
@@ -34,11 +35,23 @@ public class User {
         return name;
     }
 
+    public WriteInfo getWriteInfo() {
+        return this.writeInfo;
+    }
+
     public LocalDateTime getCreateDate() {
-        return createDate;
+        return writeInfo.getCreateDate();
+    }
+
+    public LocalDateTime getModifyDate() {
+        return writeInfo.getModifyDate();
     }
 
     public void changeName(String newName) {
         this.name = newName;
+    }
+
+    public void updateModifyDate() {
+        this.writeInfo.updateModifyDate();
     }
 }
